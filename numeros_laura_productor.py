@@ -19,15 +19,15 @@ def main(hostname):
     client.connect(hostname)
     #client.on_publish = on_publish
     client.on_publish = lambda client, userdata, mid: on_publish(client, userdata, mid, message, topic)
-    topic1 = "clients/laura/numbers/enteros"
-    topic2 = "clients/laura/numbers/reales"
+    topic = "clients/laura/numbers"
+    #topic2 = "clients/laura/numbers/reales"
     while True:
         message = randint(0,99)
-        topic = topic1
+        #topic = topic1
         client.publish(topic, message)
         time.sleep(2)
         message = random()
-        topic = topic2
+        #topic = topic2
         client.publish(topic, message)
         time.sleep(2)
 
