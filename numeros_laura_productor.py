@@ -7,7 +7,7 @@ Created on Tue Apr 18 19:22:26 2023
 from paho.mqtt.client import Client
 from multiprocessing import Lock
 import time
-from random import randint
+from random import randint,random
 
 def on_publish(mqttc, userdata, mid, message, topic):
     print(f"MESSAGE PUBLISHED: {message}")
@@ -19,10 +19,15 @@ def main(hostname):
     client.connect(hostname)
     #client.on_publish = on_publish
     client.on_publish = lambda client, userdata, mid: on_publish(client, userdata, mid, message, topic)
-    topic1 = "clients/laura/numbers"
+    topic1 = "clients/laura/numbers/enteros"
+    topic2 = "clients/laura/numbers/reales"
     while True:
         message = randint(0,99)
         topic = topic1
+        client.publish(topic, message)
+        time.sleep(2)
+        message = random()
+        topic = topic2
         client.publish(topic, message)
         time.sleep(2)
 
